@@ -1,0 +1,28 @@
+{
+	"name": "blog-server",
+	"version": "1.0.0",
+	"description": "",
+	"type": "module",
+	"main": "index.js",
+	"scripts": {
+		"start": "node --env-file=.env index.js",
+		"dev": "nodemon --env-file=.env index.js",
+		"test": "mocha"
+	},
+	"keywords": [],
+	"author": "Rudraksh Nanavaty",
+	"dependencies": {
+		"bcrypt": "^5.1.1",
+		"body-parser": "^1.20.2",
+		"cors": "^2.8.5",
+		"express": "^4.18.3",
+		"jsonwebtoken": "^9.0.2",
+		"morgan": "^1.10.0",
+		"pg": "^8.11.3"
+	},
+	"devDependencies": {
+		"chai": "^5.1.0",
+		"mocha": "^10.3.0",
+		"nodemon": "^3.1.0"
+	}
+}

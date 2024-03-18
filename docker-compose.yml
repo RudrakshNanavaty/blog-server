@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+    server:
+        container_name: blog-server
+        build: ./server
+        ports:
+            - '8000:8000'
+        volumes:
+            - ./server:/usr/src/app
+        environment:
+            NODE_ENV: dev
+        networks:
+            - blog-backend
+    postgres:
+        container_name: blog-database
+        image: postgres:latest
+        environment:
+            POSTGRES_DB: blog-db
+            POSTGRES_USER: blog-db-admin
+            POSTGRES_PASSWORD: blog-password
+        ports:
+            - '5432:5432'
+        volumes:
+            - blog-database:/var/lib/postgresql/data
+            - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+        networks:
+            - blog-backend
+    nginx:
+        container_name: blog-nginx
+        build: ./nginx
+        ports:
+            - '443:443'
+        networks:
+            - blog-backend
+        depends_on:
+            - server
+
+networks:
+    blog-backend:
+        driver: bridge
+
+volumes:
+    blog-database:
